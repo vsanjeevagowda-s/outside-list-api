@@ -16,22 +16,20 @@ const PORT = process.env.PORT || 3001;
 app.get('/api/items', async (req, res) => {
   try {
     const listItems = await List.find({});
-    res.status(200).json({ listItems });
+    return res.status(200).json({ items: listItems });
   } catch (error) {
-    res.status(422).json(error);
+    return res.status(422).json(error);
   }
 });
 
-app.put('/api/items/:id', (req, res) => {
+app.put('/api/items/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { checked, title } = req.body;
-    // items[parseInt(id) - 1] = item;
-    const item = items.find(i => i.id == id);
-    item.
-      res.status(200).json({ item });
+    const item = await List.findOneAndUpdate({_id: id}, { checked, title }, { new: true });
+    return res.status(200).json({ item });
   } catch (error) {
-    res.status(422).json(error);
+    return res.status(422).json(error);
   }
 });
 

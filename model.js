@@ -9,6 +9,8 @@ mongoose.connect(`${DATABASE_URL}`, {
   useCreateIndex: true,
   useNewUrlParser: true,
 });
+
+
 const db = mongoose.connection;
 
 db.on('connected', () => {
@@ -25,5 +27,6 @@ listSchema.set('toJSON', { virtuals: true });
 const List = mongoose.model('List', listSchema);
 
 module.exports = {
-  List
+  List,
+  db
 }
