@@ -20,7 +20,7 @@ app.put('/api/items/:id', (req, res) => {
     const { id } = req.params;
     const { item } = req.body;
     items[parseInt(id) - 1] = item;
-    res.status(200).json({ items });
+    res.status(200).json({ item });
   } catch (error) {
     res.status(422).json(error);
   }
